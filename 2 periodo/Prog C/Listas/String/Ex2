@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+char** criasenha(char** s, int n) {
+	char** senhas;
+	senhas = (char**)malloc(n * (sizeof(char*)));
+	if (senhas == NULL) return NULL;
+	for (int i = 0; i < n; i++) {
+		if (s[i] != NULL)
+		{
+			senhas[i] = (char*)malloc(n * (strlen(s[i]) + 1));
+			strcpy(senhas[i], s[i]);
+		}
+		else {
+			senhas[i] = NULL;
+		}
+	}return senhas;
+}
+void imprime(char** senhas, int n) {
+	int i;
+	for (i = 0; i < n; i++) {
+		if (senhas[i] == NULL) {
+			printf("NULL\n");
+		}
+		else {
+			printf("  %s \n", senhas[i]);
+		}
+	}
+}
+int digito(int c)
+{
+	return c >= '0' && c <= '9';
+}
+void valida(char** senha, int n, int user) {
+	int i;
+	int flag = 0;
+	for (i = 0; i < strlen(senha[user]); i++)
+	{
+		if (digito(senha[user][i])) {
+			flag = 1;
+		}
+	}return flag;
+}
+void elimina(char** senha, int user) {
+	free(senha[user]);
+	senha[user] = NULL;
+}
+void elimina_todos(char** senha, int n) {
+	int i;
+	for (i = 0; i < n; i++) {
+		free(senha[i]);
+	} free(senha); return;
+}
+int main(void) {
+	char** senhas;
+	char* s[] = { "an5a",NULL,"puc","9casa" };
+	int i, n;
+	n = 4;
+	senhas = criasenha(s, n);
+	imprime(senhas, n);
+	i = 0;
+	printf("user %d senha: %s valida: %d\n", i, senhas[i], valida(senhas, n, i));
+	i = 2;
+	printf("user %d senha: %s valida: %d\n", i, senhas[i], valida(senhas, n, i));
+	i = 3;
+	printf("user %d senha: %s valida: %d\n", i, senhas[i], valida(senhas, n, i));
+	elimina(senhas, 2);
+	printf("Todas as Senhas:\n");
+	imprime(senhas, n);
+	elimina(senhas, 0);
+	printf("Todas as Senhas:\n");
+	imprime(senhas, n);
+	eliminaTudo(senhas, n);
+	return 0;
+
+}

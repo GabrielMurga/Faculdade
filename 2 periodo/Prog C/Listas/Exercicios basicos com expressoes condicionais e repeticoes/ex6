@@ -1,0 +1,30 @@
+#include <stdio.h>
+char* situacao( float media) {
+	if (media >= 5.0){
+		return "Aprovado";
+	}
+	else if (media >= 3.0) {
+		return 	"em prova final";
+	}
+	else {
+		return "Reprovado";
+	}
+}
+char* mensagem( float media) {
+	if (media >= 9) {
+		return "Parabens pelo seu alto desempenho!";
+	}
+	else {
+		return"";
+	}
+}
+int main(void) {
+	float nota1, nota2, media;
+	printf("\nDigite a sua primeira e segunda nota respectivamente: \n");
+	scanf_s("%f%f", &nota1, &nota2);
+	media = (nota1 + nota2) / 2;
+	printf(" A sua media e %.2f: \n", media);
+	printf("Voce esta %s ! \n", situacao(media));
+	printf("%s",mensagem(media));
+	return 0;
+}

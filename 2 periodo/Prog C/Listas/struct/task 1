@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define TRUE 1
+#define FALSE 0
+struct ponto {
+	float x;
+	float y;
+};
+typedef struct ponto Ponto;
+
+struct circle {
+	Ponto centro;
+	float raio;
+}; typedef struct circle Circle;
+int PertenceCirculo(  Ponto p, Circle c) {
+	if (sqrt((p.x - c.centro.x) * (p.x - c.centro.x) + (p.y - c.centro.y) * (p.y - c.centro.y)) <= c.raio) {
+		return TRUE;
+	} return FALSE;
+}
+int main(void) {
+	Ponto p1;
+	Ponto p2;
+	p1.x = 1.5;
+	p1.y = 1.5;
+	p2.x = 0.0;
+	p2.y = 5.0;
+	Circle C1;
+	C1.centro.x = 0.0;
+	C1.centro.y = 0.0;
+	C1.raio = 2.0;
+	if (PertenceCirculo(p1, C1) == TRUE) {
+		printf("O ponto esta dentro do circulo");
+	}
+	else { printf("O ponto nao pertence ao circulo"); }
+	return 3;
+}

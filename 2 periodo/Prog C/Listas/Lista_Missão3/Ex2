@@ -1,0 +1,34 @@
+/*Escreva e teste uma função que recebe um vetor de números float e retorna um outro vetor invertido,
+mas sem destruir o original. Na main, defina e inicialize o vetor original com alocação estática.
+Defina uma função que imprime vetores com duas casas decimais. Imprima os dois vetores.
+Exemplo: para {5, 7, 2, 3} a função retorna {3, 2, 7, 5}.*/
+#include <stdio.h>
+#include <stdlib.h>
+ 
+
+void inverte_vetor(float * vetor_original,float * vetor_destino,int tamanho) {
+	for (int i = 0; i < tamanho; i++) {
+		vetor_destino[i] = vetor_original[(tamanho-1) - i];
+	}
+}
+void imprime_vetores(float* vetor1, float* vetor2,int tamanho) {
+
+	printf("\nVetor original :\n");
+	for (int i = 0; i < tamanho; i++) {
+		printf("%.2f ", vetor1[i]);
+	}
+	printf("\nVetor invertido :\n");
+	for (int i = 0; i < tamanho; i++) {
+		printf("%.2f ", vetor2[i]);
+	}
+	return;
+}
+ int main() {
+
+	float vetor_original[4] = { 5,7,2,3 };
+	float vetor_invertido[4];
+	inverte_vetor(vetor_original, vetor_invertido, 4);
+	imprime_vetores(vetor_original, vetor_invertido, 4);
+	return 1;
+	
+}

@@ -1,0 +1,43 @@
+
+1-
+.data:
+
+    Define a seção de dados, onde a string "ls -ls" é armazenada com o rótulo s1.
+
+.text:
+
+    Define a seção de código.
+
+Prólogo:
+
+    Salva o valor de %rbp na pilha com o comando pushq %rbp e move o valor do ponteiro de pilha %rsp para o ponteiro de base %rbp para criar um novo quadro de pilha.
+
+Instruções principais:
+
+    movq $s1, %rdi: Move o endereço da string "ls -ls" para o registrador %rdi, que é o registrador responsável por armazenar o primeiro argumento da função em chamadas de sistema no ABI x86-64.
+    call system: Faz a chamada à função system(), passando a string como argumento para executar o comando no sistema.
+
+Finalização:
+
+    leave: Restaura o valor original de %rbp e limpa o quadro de pilha.
+    ret: Retorna o controle para a função chamadora..data:
+
+    Define a seção de dados, onde a string "ls -ls" é armazenada com o rótulo s1.
+
+.text:
+
+    Define a seção de código.
+
+Prólogo:
+
+    Salva o valor de %rbp na pilha com o comando pushq %rbp e move o valor do ponteiro de pilha %rsp para o ponteiro de base %rbp para criar um novo quadro de pilha.
+
+Instruções principais:
+
+    movq $s1, %rdi: Move o endereço da string "ls -ls" para o registrador %rdi, que é o registrador responsável por armazenar o primeiro argumento da função em chamadas de sistema no ABI x86-64.
+    call system: Faz a chamada à função system(), passando a string como argumento para executar o comando no sistema.
+
+Finalização:
+
+    leave: Restaura o valor original de %rbp e limpa o quadro de pilha.
+    ret: Retorna o controle para a função chamadora.

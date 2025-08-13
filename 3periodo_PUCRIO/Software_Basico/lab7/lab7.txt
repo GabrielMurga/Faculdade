@@ -1,0 +1,30 @@
+1-
+Primeiro eu defino S2 como um array de char.
+sf e sf2 como as strings para meu printf
+movq  $S2, %r12-> aloco minha array no meu registrador %r12
+Abro L1:
+cmpb  $0, (%r12)-> Comparo o valor do primeiro numero do array com 0
+je  L2  -> Se for igual a 0 vou para L2
+ movsbl  (%r12), %eax-> To movendo para o registrador %eax, o valor/conteúdo do %r12. O movsbl pega 1 byte e
+ extende para 32 bits. 
+ addq  $1, %r12 -> Incrementa 1 no %r12 para continuar o looping
+ 2- As mudanças que fiz no código foram as seguintes:
+    Adicionei essas linhas para comparar com '123' e '125'.
+      cmpb $123, (%r12)
+      je L3
+      cmpb $125, (%r12)
+      je L3
+    E defini essa zona  como L3:
+     addq  $1, %r12  /* r12 += 1; */
+     jmp  L1  
+
+
+ 3- Para o terceiro codigo de assembly, utilizei o outro codigo como base e fiz altereacoes, vou aqui citar os principais
+ pontos. O meu S2 eu mudei para uma variavel de inteiro, para que eu consiga fazer a multiplicação, no valor de 1
+  movl  (%r12), %eax   /* eax = valor em S2 */
+  cmpl  $11, %eax  
+  Movo o conteudo de %r12 para eax e compara com 11, se for 11 eu ja pulo meu looping e vou para meu L2, caso nao seja,
+  eu imull  %eax, %eax  pego o quadrado do numero, depois dou o print normalmente, e para somar 1 no meu valor eu faco
+  addl $1, (%r12) , l pois se trata de um inteiro (long).    
+ .
+ ///////Nao entendi muito bem o que eh pra fazer na 4 perguntar ao professor///

@@ -1,0 +1,36 @@
+/* Escreva um programa para ler os números de matrículas(como inteiros) dos alunos de um cursinho, as
+notas dos seus trabalhos e exiba ao final a matrícula e a nota final do aluno(média das notas dos trabalhos).
+O curso é personalizado, ou seja, cada aluno tem um conjunto de trabalhos diferente, inclusive em relação a
+número de trabalhos.Seu programa deve :
+-ler a matrícula de um aluno
+- ler o número x de trabalhos desse aluno
+- ler as x notas do aluno, calculando a média
+- exibir a matrícula e média do aluno
+A leitura de um valor de matrícula igual a 0 (ZERO)indica o final da entrada de dados.*/
+#include <stdio.h>
+int main(void) {
+	int ntrabalhos,matricula,i;
+	float soma_notas,notas,media;
+	matricula = 1;
+	while (matricula != 0) {
+		printf("\nDigite o seu numero de matricula: \n");
+		scanf_s("%d", &matricula);
+		if (matricula == 0) {
+			printf("\nPrograma encerrado!\n");
+			break;
+		}
+		printf("Digite o numero de trabalho que voce fez no semestre: \n");
+		scanf_s("%d", &ntrabalhos);
+		soma_notas = 0;
+		for (i = 0; i < ntrabalhos; i++) {
+			printf("Digite sua nota %d :\n",i+1);
+			scanf_s("%f", &notas);
+			soma_notas += notas;
+		}
+		media = soma_notas / ntrabalhos;
+		printf("\nAluno %d sua media no semestre e %2.f\n", matricula, media);
+
+
+	}
+	return 0;
+}

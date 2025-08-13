@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+int** inverte_vetor(int* v, int m) {
+	int i,j,temp;
+	for (i = 0, j = m - 1; i < j; i++, j--) {
+		temp = v[i];
+		v[i] = v[j];
+		v[j] = temp;
+	}
+	return v;
+}
+void imprime_vetor(int* v, int m) {
+	int i;
+	for (i = 0; i < m; i++) {
+		printf(" %d ", v[i]);
+	}return;
+}
+int main() {
+	 int v[5] = { 0,1,2,3,4 };
+	 int m = 5;
+	 printf("\n Vetor original: \n");
+	 imprime_vetor(v, m);
+	 printf("\n Vetor Invertido: \n");
+	 imprime_vetor(inverte_vetor(v, m), m);
+	 return 1;
+}

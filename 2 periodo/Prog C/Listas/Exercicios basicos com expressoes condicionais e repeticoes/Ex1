@@ -1,0 +1,8 @@
+#include <stdio.h>
+int main(void) {
+	int entrega, devolucao, tempo;
+	printf("Diga o dia de entrega e depois o de  devolução do livro: \n");
+	scanf_s("%d %d", &entrega, &devolucao);
+	tempo = devolucao-entrega;
+	printf("O tempo que voce permaneu com o livro foi de %d dias", tempo);
+}

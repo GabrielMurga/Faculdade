@@ -1,0 +1,133 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+struct pessoa
+{
+	int idade;
+	char* nome;
+	struct pessoa* next;
+};
+typedef struct pessoa Pessoa; 
+char* Mallocadora(int n) {
+	char* buffer;
+	buffer = (char*)malloc(n * sizeof(char)+1);
+	if (buffer == NULL); return NULL;
+	return buffer;
+}
+
+Pessoa* lst_pessoa_insere(Pessoa* lista, int idade,char* nome) {
+	Pessoa* novo = (Pessoa*)malloc(sizeof(Pessoa));
+	if (novo != NULL) {
+		novo->idade = idade;
+		novo->nome = Mallocadora(strlen(nome));
+		novo->nome = nome;
+		novo->next = lista;
+	} return novo; 
+ }
+lst_pessoa_imprime(Pessoa * lst) {
+	Pessoa* p;
+	for (p = lst; p != NULL; p = p->next) {
+		printf("Idade: %d  Nome: %s\n", p->idade,p->nome);
+	}
+}
+struct elemento
+{	
+	int info;
+	struct elemento * next;// faz com que vire um ponteiro para o proximo elemento da lista.
+
+};
+typedef struct elemento Elemento;
+
+Elemento* lst_insere(Elemento* lista, int info) {
+	Elemento* novo = (Elemento*)malloc(sizeof(Elemento));
+	if (novo != NULL) {
+		novo->info = info;
+		novo->next = lista;
+	} return novo; 
+ }
+
+lst_imprime(Elemento * lst) {
+	Elemento* p;
+	for (p = lst; p != NULL; p = p->next) {
+		printf("%d\n", p->info);
+	}
+}
+
+Elemento* lst_retira(Elemento* lst, int a) {
+	Elemento* p = lst;
+	Elemento* ant = NULL;
+	while (p != NULL && p->info != a) {
+		ant = p;
+		p = p->next;
+	}
+	if (ant == NULL)
+		lst = p->next;
+	else {
+		ant->next = p->next;
+	}
+	free(p);
+	return lst;
+}
+lst_libera(Elemento* lst) {
+	Elemento* p;
+	p = lst;
+	while (lst != NULL) {
+		p = p->next;
+		free(lst);
+		lst = p;
+	}
+	if (lst == NULL) {
+		printf("A lista foi liberada com sucesso!");
+	}
+}
+Elemento* lst_insere_ordenado(Elemento* lst, int valor) {
+	Elemento* p = lst;
+	Elemento* ant = NULL;
+	Elemento* novo;
+	novo = (Elemento*)malloc(sizeof(Elemento));
+	if (novo != NULL) {
+		novo->info = valor;
+		while (p != NULL && p->info < valor) {
+			ant = p;
+			p = p->next;
+		}
+		if (ant == NULL) {
+			novo->next = lst;// coloca o item no inicio
+			lst = novo;
+		}
+		else {
+			novo->next = ant->next;
+			ant->next = novo;
+		}
+	}
+	return lst;
+}
+int main() {
+	Elemento* lst = NULL;
+	//lst = lst_insere(lst, 0);
+	//lst = lst_insere(lst, 1);
+	//lst = lst_insere(lst, 2);
+	//lst = lst_insere(lst, 3);
+	//lst_imprime(lst_retira(lst, 2));
+	//lst = lst_retira(lst, 3);
+	//lst_imprime(lst);
+	//lst_libera(lst);
+	lst=lst_insere_ordenado(lst, 2);
+	lst=lst_insere_ordenado(lst, 6);
+	lst=lst_insere_ordenado(lst, 3);
+	lst=lst_insere_ordenado(lst, 5);
+	lst=lst_insere_ordenado(lst, 4);
+	lst=lst_insere_ordenado(lst, 1);
+	lst_imprime(lst);
+	Pessoa* lista = NULL;
+	lista=lst_pessoa_insere(lista, 18, "Gabriel");
+	lista=lst_pessoa_insere(lista, 28, "Joaquim");
+	lista=lst_pessoa_insere(lista, 32, "Cleiton");
+	lista=lst_pessoa_insere(lista, 14, "Mario");
+	lista=lst_pessoa_insere(lista, 12, "Daniel");
+	lista=lst_pessoa_insere(lista, 18, "Murilo");
+	lista=lst_pessoa_insere(lista, 43, "Wagner");
+	lista=lst_pessoa_insere(lista, 21, "Mauricio");
+	lst_pessoa_imprime(lista);
+
+}

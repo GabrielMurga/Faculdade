@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+#include <ctype.h>
+char** criasenha(char** s, int n) {
+	int i;
+	char** senhas;
+	senhas = (char**)malloc(5* (sizeof(char*)));
+	if (senhas == NULL) {
+		printf("Erro");
+		exit(2);
+	}
+	for (i = 0; i < n; i++) {
+		senhas[i] = (char*)malloc(n*sizeof(char));
+		if (senhas[i] == NULL) {
+			printf("Erro");
+			exit(3);	
+		}senhas[i] = s[i];
+	} 
+	return senhas;
+
+}
+void imprime(char** senhas,int n) {
+	int i;
+	for (i = 0; i < n; i++) {
+			printf("%s", senhas[i]);
+		}
+	}
+void confere(char * c) {
+	if ('c' >= 0 && 'c' <= 9) return;
+}
+int main(void) {
+	char** senhas;
+	char* s[] = { "an5a",NULL,"puc","9casa" };
+	senhas=criasenha(s, 4);
+	imprime(senhas, 4);
+}
+int valida(char** senhas, int n, int user) {
+	int i;
+	int flag = 0;
+	for (i = 0; i < strlen(senhas[user][i]); i++) {
+		if (confere(senhas[user][i]){
+			printf("A senha é valida");
+			flag=1;
+			 
+	}
+ }

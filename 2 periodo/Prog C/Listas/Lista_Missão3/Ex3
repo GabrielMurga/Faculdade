@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int* filtra_vetor(int* vetor_original, int* tamanho_pares, int tamanho) {
+    int q = 0;
+    // Contar quantos elementos pares existem
+    for (int i = 0; i < tamanho; i++) {
+        if (vetor_original[i] % 2 == 0) {
+            q += 1;
+        }
+    }
+
+    if (q == 0) {
+        *tamanho_pares = 0;
+        return NULL; // Retornar NULL imediatamente se não houver elementos pares
+        exit;
+    }
+
+    int* vetor_mudado = (int*)malloc(q * sizeof(int));
+    if (vetor_mudado == NULL) {
+        *tamanho_pares = 0;
+        return NULL; // Segurança contra falha de alocação
+        exit;
+    }
+
+    int index = 0;
+    for (int j = 0; j < tamanho; j++) {
+        if (vetor_original[j] % 2 == 0) {
+            vetor_mudado[index++] = vetor_original[j];
+        }
+    }
+    *tamanho_pares = q;
+    return vetor_mudado;
+}
+
+int main() {
+    int vetor_original[6] = { 3, 4, 2, 6, 8, 9 };
+    int tamanho_pares;
+    int* vetor_pares = filtra_vetor(vetor_original, &tamanho_pares, 6);
+
+    if (vetor_pares != NULL) {
+
+        printf("\nO vetor dos numeros pares e:\n");
+        for (int i = 0; i < tamanho_pares; i++) {
+            printf(" %d", vetor_pares[i]);
+        }
+        printf("\n");
+        free(vetor_pares); // Liberar a memória alocada
+    }
+    else {
+        printf("\nNão há números pares no vetor original.\n");
+    }
+
+    return 0;
+}

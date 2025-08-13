@@ -1,0 +1,19 @@
+/*Exemplo: Faça uma função chamada soma que receba como parâmetro dois números inteiros e
+retorne a sua soma.Teste a sua função.
+*/
+#include <stdio.h>
+
+int soma(int n1, int n2) {
+    int resultado = n1 + n2;
+    return resultado;
+}
+
+int main(void) {
+    int n1, n2;
+    printf("Digite dois numeros: ");
+    scanf_s("%d %d", &n1, &n2);
+
+    printf("A soma dos dois numeros é %d\n", soma(n1, n2));
+
+    return 0;
+}

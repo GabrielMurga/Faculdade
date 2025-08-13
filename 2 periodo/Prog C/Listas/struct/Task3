@@ -1,0 +1,140 @@
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
+typedef struct notas Notas;
+struct notas
+{
+	float p1;
+	float p2;
+};
+
+typedef struct aluno Aluno;
+struct aluno
+{
+	char* nome;
+	Notas* notas;
+};
+
+char* allocStr(int n)
+{
+	char* buffer = (char*)malloc(n * sizeof(char) + 1);
+	if (buffer == NULL)
+	{
+		printf("Erro ao allocar string.\n");
+		return NULL;
+	}
+	return buffer;
+}
+
+Aluno* montaAluno(char* nome, float p1, float p2)
+{
+	int i;
+	Aluno* aluno = (Aluno*)malloc(sizeof(Aluno));
+	if (aluno == NULL)
+	{
+		printf("Erro ao allocar aluno.\n");
+		return NULL;
+	}
+
+	Notas* notas = (Notas*)malloc(sizeof(Notas));
+	if (notas == NULL)
+	{
+		printf("Erro ao allocar notas.\n");
+		return NULL;
+	}
+
+	aluno->nome = allocStr((int)strlen(nome));
+
+	for (i = 0; i < strlen(nome); i++)
+	{
+		aluno->nome[i] = nome[i];
+	}
+	aluno->nome[i] = '\0';
+	notas->p1 = p1;
+	notas->p2 = p2;
+	aluno->notas = notas;
+
+	return aluno;
+}
+
+int buscaAluno(float p1, Aluno** v)
+{
+	int i;
+
+	printf("BUSCANDO ALUNO PELA NOTA %.f..\n\n", p1);
+	for (i = 0; i < 3; i++)
+	{
+		if (v[i]->notas->p1 == p1)
+		{
+			printf("Aluno encontrado: %s\n", v[i]->nome);
+			return -1;
+		}
+	}
+	printf("Aluno inexistente.\n");
+	return 0;
+}
+
+void imprimeVetor(Aluno** v, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		printf("\n************* ALUNO %d *******************\n", i);
+		printf("Nome: %s\n", v[i]->nome);
+		printf("Nota 1: %.1f\n", v[i]->notas->p1);
+		printf("Nota 2: %.1f\n", v[i]->notas->p2);
+	}
+}
+
+void liberaAluno(Aluno** v, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		free(v[i]);
+	}
+	printf("Memoria liberada.\n");
+}
+
+
+int main(void)
+{
+	int vBuffer = 3;
+	char* nome = allocStr(20);
+	float p1 = 0.0f;
+	float p2 = 0.0f;
+
+	int input;
+	
+	Aluno** v = (Aluno**)malloc(vBuffer * sizeof(Aluno));
+	if (v == NULL)
+	{
+		printf("Erro ao allocar vetor de alunos.\n");
+		exit(2);
+	}
+
+	for(int i = 0; i < vBuffer; i++)
+	{
+		printf("\n[ALUNO %d] Digite o nome, a nota da p1 e a nota da p2: \n", i);
+		input = scanf("%s %f %f", nome, &p1, &p2);
+
+		v[i] = montaAluno(nome, p1, p2);
+		if (v[i] == NULL)
+		{
+			printf("Erro ao allocar alunos.\n");
+			exit(2);
+		}
+	}
+
+	imprimeVetor(v, vBuffer);
+
+	printf("\n**************************************\n");
+	printf("Digite a nota 1 do aluno que deseja encontrar:\n");
+	input = scanf("%f", &p1);
+	buscaAluno(p1, v);
+
+	free(nome);
+	liberaAluno(v, vBuffer);
+	free(v);
+
+
+	return 0;
+}

@@ -1,0 +1,44 @@
+1-semana:
+
+***************************************************************************************************************************************************
+Decodificar UTF-8:
+
+    Ler a sequência de bytes UTF-8 do arquivo.
+    Identificar quantos bytes são usados para representar o caractere.
+    Decodificar essa sequência de bytes para obter o codepoint Unicode correspondente.
+
+Codificar para UTF-32:
+
+    Pegue o codepoint Unicode obtido e codifique-o usando UTF-32 (sempre 4 bytes).
+    Dependendo da arquitetura do sistema, você pode precisar converter o valor para o formato Little-Endian antes de escrever no arquivo.
+ ** *** ****************************************************************************************************************************************************** 
+
+Eu tenho que escrever no meu utf-32 no formato little-endian, e alem disso,
+tbm tenho que escrever o meu BOM. Tenho que criar uma funcao que
+pegue o meu valor em codepoint, representado em hexadecimal e 
+converter em little Endian. Para isso vou ter que separar os bytes e 
+depois escreve-los do byte menos significativo para o mais ( formato
+little endian).
+Como vou pegar o codepoint? Para escrever o BOM vou escrever 00 00 FE FF
+pois ele vai fazer a conversao. 
+Para os demais valores, vou ter que percorrer o arquivo e manipular o binario
+utf-8 que tem o fomato la estranho, para virar utf32 que e basicamente
+hexadecimal(eu acho).
+Para essa funca de escrever em uft-32
+
+
+escreve_utf32(File*arquivo_saida,uint32_t valor){
+    obs: uint32_t para representar um inteiro sem sinal de 32 bits, que eh no caso do utf-32
+    para pegar o 1 byte
+     uint8_t  byte1= valor &0xFF//depois para pegar o 2 byte, andar para direita >>8 entao
+     uint8_t byte 2= valor>>8 &0xFF// vou deslocar 8 para a direita para pegar o 2 byte e assim sucessicamente
+     uint8_t byte3=valor>>16 &0xFF
+     uint8_t byte4=valor>>24 &0xFF
+    fwrite(&byte1, 1, 1, arquivo);  
+    fwrite(&byte2, 1, 1, arquivo);  
+    fwrite(&byte3, 1, 1, arquivo);  
+    fwrite(&byte4, 1, 1, arquivo);
+} 
+A função write_utf32_le recebe um codepoint Unicode
+ correspondente a um caractere lido do arquivo UTF-8
+ e o escreve no arquivo de saída em formato UTF-32 Little-Endian

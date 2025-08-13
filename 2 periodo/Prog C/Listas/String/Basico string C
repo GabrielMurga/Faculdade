@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+int mytoupper(int c) {// Essa função aqui transforma de minusculo para maisculo
+	if (c >= 'a' && c <= 'z') {
+		c = (c - 'a') + 'A';
+	}return c;
+}
+int strlen(char* s) // calcula comprimento de um string
+{
+	int n;
+	for (n = 0; *s != '\0'; s++) {
+		n++;
+	}
+	return n;
+}
+void copia_string(char *s,char *t) {
+	while (*s++ = *t++);// Essa parada funciona da seguinte forma, o C entende, enquanto o que ta sendo copiado não for nulo \0, o outro recebe o valor, s rcebe o valor de t enquanto t n for \0
+}
+void strUpper1(char* s) // destroi s
+{
+	for (; *s; s++)// S tem um endereço, então vai andando com um endereço e apontando para esse endereço em seguida.
+		*s = toupper(*s);
+}
+char* strUpper2(char* s) {
+	char* p = s;// o ponteiro de p, vai apontar para o endereço de s 
+	for (; *s; s++) {
+		*s = toupper(*s);
+	}
+ }

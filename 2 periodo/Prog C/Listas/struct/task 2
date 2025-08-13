@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct ponto {
+	float x;
+	float y;
+};
+typedef struct ponto Ponto;
+struct circulo {
+	Ponto* centro;
+	float raio;
+};
+typedef struct circulo Circulo;
+Circulo * criaCirculo(Ponto p, float raio) {
+	Circulo * c;
+	c = (Circulo*)malloc(sizeof(Circulo));
+	if (c == NULL); return NULL;
+	c->centro->x = p.x;
+	c->centro->y = p.y;
+	c->raio = raio;
+	return c;
+}
+void imprimeCirculo(Circulo * c) {
+
+	printf("O centro tem os pontos (%.2f,%.2f) e o raio tem valor de %.2f", c->centro->x, c->centro->y, c->raio);
+	return;
+}
+float calculaArea(float raio) {
+	return raio * raio * 3.14;
+}
+int main(void) {
+	Ponto p;
+	float raio;
+	printf("Escolha as coordendas  do centro do seu circulo: "); scanf_s("%f %f", &p.x, &p.y);
+	printf("Defina o raio do seu circulo: "); scanf_s("%f",&raio);
+	Circulo* c;
+	c = criaCirculo(p, raio);
+	float area = calculaArea(raio);
+	printf("A area é %.2f", area);
+	imprimeCirculo(c);
+	return 0;
+}// to tendo problema para imprimir \\
