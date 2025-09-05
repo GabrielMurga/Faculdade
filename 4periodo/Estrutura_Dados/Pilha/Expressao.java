@@ -1,3 +1,5 @@
+
+
 public class Expressao {
 
     public int verificarExpressao(Pilha pilha){
