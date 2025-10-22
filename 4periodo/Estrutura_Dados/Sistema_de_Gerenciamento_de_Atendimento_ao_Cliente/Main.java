@@ -38,15 +38,25 @@ public class Main {
             FilaDeClientes.InserirAtendimento(filaAtendimento[i]);
         }
 
-        System.out.println("\n-----Clientes na Fila -----");
+        System.out.println("\n-----Clientes na Fila ESTADO INICIAL-----");
         FilaDeClientes.mostrarClienteNaFila();
+        System.out.println("\n---Atendendo Cliente---\n");
+        FilaDeClientes.AtenderCliente();
+        System.out.println("\n-----Clientes na Fila ESTADO FINAL-----");
+        FilaDeClientes.mostrarClienteNaFila();
+
 
         for(int i = 0; i< historico.length;i++){
             HistoricoSolicitacoes.adicionarSolicitacao(historico[i]);
         }
         System.out.println("\n");
-        System.out.println("\n-----Historico de Solicitacao -----\n");
-
+        System.out.println("\n-----Historico de Solicitacao ESTADO INICIAL-----\n");
         HistoricoSolicitacoes.mostrarHistoricoDeSolicitacoes();
+        System.out.println("\nREMOVENDO SOLICITAÇÕES\n");
+        HistoricoSolicitacoes.removerSolicitacao();
+        System.out.println("\n-----Historico de Solicitacao ESTADO FINAL-----\n");
+        HistoricoSolicitacoes.mostrarHistoricoDeSolicitacoes();
+
+
     }
 }
