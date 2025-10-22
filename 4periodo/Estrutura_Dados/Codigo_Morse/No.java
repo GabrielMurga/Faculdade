@@ -4,7 +4,7 @@ class No {
     No dir;       
 
     No() {
-        this.letra = '\0';  // '\0' = caractere nulo (sem valor)
+        this.letra = '\0';  // caractere nulo (sem valor)
         this.esq = null;
         this.dir = null;
     }
